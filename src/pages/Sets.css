@@ -1,0 +1,103 @@
+/* Sets.css */
+
+/* Loading container styling */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed; /* Center on the page */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Loading spinner styling */
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #09f;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading text styling */
+.loading-text {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+/* Container for the entire Sets component */
+.sets-container {
+    padding: 0 20%; /* 20% padding on left and right */
+    margin: 0 auto; /* Center the container */
+    max-width: 1200px; /* Limit maximum width for better readability */
+  }
+  
+  /* Title styling */
+  .sets-container h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #ffffff;
+  }
+  
+  /* Grid layout for the sets */
+  .sets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+    gap: 1.5rem; /* Space between grid items */
+    padding: 1rem 0; /* Padding at the top and bottom */
+  }
+  
+  /* Styling for each set card */
+  .set-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #111;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit text color */
+  }
+  
+  /* Hover effect for set cards */
+  .set-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Logo styling */
+  .set-logo {
+    width: 200px; /* Fixed width */
+    height: 200px; /* Fixed height */
+    object-fit: contain; /* Ensure the logo fits within the dimensions */
+    margin-bottom: 1rem;
+  }
+  
+  /* Set name styling */
+  .set-card h3 {
+    font-size: 1.25rem;
+    margin: 0.5rem 0;
+    color: #ffffff;
+  }
+  
+  /* Release date styling */
+  .set-card p {
+    font-size: 0.9rem;
+    color: #999;
+    margin: 0;
+  }

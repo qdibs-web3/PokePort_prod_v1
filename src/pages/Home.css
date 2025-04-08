@@ -1,0 +1,35 @@
+/* Home.css */
+
+.home-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Align content to the top */
+    height: 100vh; /* Full viewport height */
+    background-image: url('../assets/pokefuck.png'); /* Replace with your image path */
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    color: rgb(255, 255, 255); /* Text color */
+    padding: 20px; /* Add some padding */
+  }
+  
+  .home-container h1 {
+    font-size: 2rem; /* Adjust the font size as needed */
+    text-shadow: 12px 12px 14px rgba(0, 0, 0, 0.5); /* Add a shadow to the text */
+    background-color: #007bff; /* Semi-transparent background for better readability */
+    opacity: .7;
+    padding: 10px; /* Add padding to the text */
+    border-radius: 10px; /* Rounded corners */
+    margin: 0; /* Remove default margin */
+    position: absolute; /* Position the h1 absolutely */
+    top: 78%; /* Move down by 60% of the viewport height */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+  }
+  
+  @media (max-width: 480px) {
+    .home-container h1 {
+      font-size: 28px; /* Adjust font size for smaller screens */
+      top: 50%; /* Adjust position for smaller screens */
+    }
+  }
