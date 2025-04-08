@@ -24,9 +24,6 @@ const generateToken = (userId) => {
 
 // Login endpoint
 module.exports = async (req, res) => {
-  // At the beginning of your login.js handler
-  console.log('Login request body:', req.body);
-
   // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
