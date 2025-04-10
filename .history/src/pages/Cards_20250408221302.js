@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import api from '../utils/api';
+import axios from 'axios';
 import './Cards.css'; // Import the CSS file
 
 const Cards = () => {
@@ -16,14 +16,14 @@ const Cards = () => {
 
   useEffect(() => {
     // Fetch cards for the set
-    api.get(`/api/cards?q=set.id:${setId}`).then((res) => {
+    axios.get(`/api/cards?q=set.id:${setId}`).then((res) => {
       setCards(res.data.data); // Store the fetched cards
       setSortedCards(sortCards(res.data.data, sortType)); // Sort the cards initially
       setLoading(false); // Set loading to false after data is fetched
     });
 
     // Fetch set name (assuming you have an endpoint to get set details)
-    api.get(`/api/sets?q=id:${setId}`).then((res) => {
+    axios.get(`/api/sets?q=id:${setId}`).then((res) => {
       if (res.data.data && res.data.data.length > 0) {
         setSetName(res.data.data[0].name); // Set the set name
       }
@@ -69,7 +69,7 @@ const Cards = () => {
       alert('Please log in to add cards to your portfolio.');
       return;
     }
-    api.post('/api/portfolio', { cardId })
+    axios.post('/api/portfolio', { cardId }, { headers: { Authorization: `Bearer ${token}` } })
       .then(() => alert('Card added to portfolio!'))
       .catch((err) => alert(err.response?.data?.error || 'An error occurred'));
   };

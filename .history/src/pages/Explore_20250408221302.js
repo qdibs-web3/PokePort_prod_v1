@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../utils/api';
+import axios from 'axios';
 import './Explore.css';
 
 const Explore = () => {
@@ -29,7 +29,7 @@ const Explore = () => {
   useEffect(() => {
     if (view === 'cards') {
       setLoading(true);
-      api.get('/api/sets')
+      axios.get('/api/sets')
         .then((res) => {
           const uniqueSeries = [...new Set(res.data.data.map((set) => set.series))];
           setSeries(uniqueSeries);
@@ -48,7 +48,7 @@ const Explore = () => {
       try {
         // The Pokemon TCG API doesn't have a supertype:sealed filter
         // Instead, we'll use a direct call to get sealed products
-        const res = await api.get('/api/sealed');
+        const res = await axios.get('/api/sealed');
         setSealedProducts(res.data.data || []);
         setLoading(false);
       } catch (error) {
@@ -98,9 +98,10 @@ const Explore = () => {
       alert('Please log in to add to your portfolio.');
       return;
     }
-    api.post(
+    axios.post(
       '/api/portfolio', 
-      { itemId: productId, isSealed: true }
+      { itemId: productId, isSealed: true },
+      { headers: { Authorization: `Bearer ${token}` } }
     )
       .then(() => alert('Sealed product added to portfolio!'))
       .catch((err) => {

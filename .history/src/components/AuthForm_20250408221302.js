@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import api from '../utils/api';
 import './AuthForm.css'
 
 const AuthForm = ({ onLogin }) => {
@@ -13,7 +13,7 @@ const AuthForm = ({ onLogin }) => {
     e.preventDefault();
     const endpoint = isLogin ? '/api/login' : '/api/auth';
     try {
-      const response = await api.post(endpoint, { username, password });
+      const response = await axios.post(endpoint, { username, password });
       if (isLogin) {
         localStorage.setItem('token', response.data.token);
         onLogin({ name: username }); // Pass user data (e.g., username) to onLogin
@@ -23,7 +23,6 @@ const AuthForm = ({ onLogin }) => {
         setIsLogin(true); // Switch to login form after registration
       }
     } catch (err) {
-      console.error('Auth error:', err);
       alert(err.response?.data?.error || 'An error occurred');
     }
   };

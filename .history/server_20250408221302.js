@@ -14,14 +14,7 @@ const setsHandler = require('./api/sets');
 const app = express();
 
 // Middleware
-// Configure CORS to allow requests from both localhost:3000 and production domain
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://poke-port-prod-v1.vercel.app'
-  ],
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 
 // Serve static files from the React app

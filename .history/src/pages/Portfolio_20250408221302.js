@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../utils/api';
+import axios from 'axios';
 import './Portfolio.css';
 
 const Portfolio = ({ isLoggedIn, user }) => {
@@ -22,8 +22,10 @@ const Portfolio = ({ isLoggedIn, user }) => {
     if (isLoggedIn) {
       const fetchPortfolio = async () => {
         try {
-          // No need to manually set token as it's handled by the api utility
-          const response = await api.get('/api/portfolio');
+          const token = localStorage.getItem('token');
+          const response = await axios.get('/api/portfolio', {
+            headers: { Authorization: `Bearer ${token}` },
+          });
           const sortedCards = sortCards(response.data, 'price');
           setPortfolioCards(sortedCards);
         } catch (err) {
@@ -57,6 +59,8 @@ const Portfolio = ({ isLoggedIn, user }) => {
 
   const updateQuantity = async (itemId, newQuantity, isSealed) => {
     try {
+      const token = localStorage.getItem('token');
+      
       if (newQuantity <= 0) {
         // First remove from local state to prevent UI issues
         setPortfolioCards(prevCards => 
@@ -66,19 +70,21 @@ const Portfolio = ({ isLoggedIn, user }) => {
         );
         
         // Then make API call to delete
-        await api.delete(
+        await axios.delete(
           `/api/portfolio/${itemId}`,
           {
+            headers: { Authorization: `Bearer ${token}` },
             params: { isSealed: isSealed }
           }
         );
       } else {
-        const response = await api.put(
+        const response = await axios.put(
           `/api/portfolio/${itemId}`,
           { 
             quantity: newQuantity,
             isSealed: isSealed 
-          }
+          },
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         
         setPortfolioCards(prevCards =>

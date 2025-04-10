@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import api from '../utils/api';
 import './Sets.css'; // Import the CSS file
 
 const Sets = () => {
@@ -11,7 +11,7 @@ const Sets = () => {
 
   useEffect(() => {
     setLoading(true); // Set loading to true before the API call
-    api.get(`/api/sets?q=series.id:${series}`)
+    axios.get(`/api/sets?q=series.id:${series}`)
       .then((res) => {
         setSets(res.data.data);
         setLoading(false); // Set loading to false after the data is fetched
@@ -32,6 +32,7 @@ const Sets = () => {
       <button className="back-button" onClick={handleBackClick}>
         &larr; Back
       </button>
+
       {/* Loading icon logic */}
       {loading ? (
         <div className="loading-container">
